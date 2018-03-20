@@ -29,7 +29,7 @@ while [ 1 ]; do
 
 	# Create backup
 	for db_name in ${DATABASES}; do
-		TARGET_FILE="${TARGET_DIR}/${BACKUP_DATE}_${dbname}.sql"
+		TARGET_FILE="${TARGET_DIR}/${BACKUP_DATE}_${db_name}.sql"
 		step "Creating backup of ${db_name} in ${TARGET_FILE}..."
 		mysqldump \
 			-h "${MYSQL_HOST:-mariadb}" -u "${MYSQL_USER:-root}" -p${MYSQL_PASSWORD} \
