@@ -2,7 +2,7 @@
 set -euo pipefail
 
 function step() {
-	echo "[$(date +%Y-%m-%d %H:%M:%S)] $@"
+	echo "[$(date +"%Y-%m-%d %H:%M:%S")] $@"
 }
 
 [ -z "${MYSQL_PASSWORD:-}" ] && {
@@ -16,7 +16,7 @@ while [ 1 ]; do
 	DELETE_OLDER_THAN=${DELETE_OLDER_THAN:-2}
 
 	# This directory is exposed by the postgres image
-	TARGET_DIR=/var/lib/postgresql/data
+	TARGET_DIR=/data
 
 	BACKUP_DATE=$(date +%Y-%m-%d_%H-%M-%S)
 
@@ -33,7 +33,7 @@ while [ 1 ]; do
 		step "Creating backup of ${db_name} in ${TARGET_FILE}..."
 		mysqldump \
 			-h "${MYSQL_HOST:-mariadb}" -u "${MYSQL_USER:-root}" -p${MYSQL_PASSWORD} \
-			-a --database "${db_name}" | gzip >"${TARGET_FILE}"
+			-a --databases "${db_name}" | gzip >"${TARGET_FILE}"
 	done
 
 	# Dump grants
