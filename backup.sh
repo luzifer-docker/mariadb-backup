@@ -36,10 +36,10 @@ while [ 1 ]; do
 			-a --databases "${db_name}" | gzip >"${TARGET_FILE}"
 	done
 
-	# Dump grants
-	GRANTS_FILE="${TARGET_DIR}/${BACKUP_DATE}_grants.sql"
-	step "Creating grants backuo in ${GRANTS_FILE}..."
-	pt-show-grants -h "${MYSQL_HOST:-mariadb}" -u "${MYSQL_USER:-root}" -p "${MYSQL_PASSWORD}" >"${GRANTS_FILE}"
+	# Dump grants -- Disabled until https://jira.percona.com/browse/PT-1561 is fixed
+	#GRANTS_FILE="${TARGET_DIR}/${BACKUP_DATE}_grants.sql"
+	#step "Creating grants backuo in ${GRANTS_FILE}..."
+	#pt-show-grants -h "${MYSQL_HOST:-mariadb}" -u "${MYSQL_USER:-root}" -p "${MYSQL_PASSWORD}" >"${GRANTS_FILE}"
 
 	# Cleanup old backups
 	step "Removing old backups..."
