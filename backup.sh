@@ -44,6 +44,7 @@ while [ 1 ]; do
 	# Cleanup old backups
 	step "Removing old backups..."
 	find "${TARGET_DIR}" -name '*.sql.gz' -mtime "${DELETE_OLDER_THAN}" -delete
+	find "${TARGET_DIR}" -name '*.sql' -mtime "${DELETE_OLDER_THAN}" -delete
 
 	# Sleep until next full hour
 	step "I'm done, see ya next hour!"
