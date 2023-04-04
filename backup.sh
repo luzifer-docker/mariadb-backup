@@ -33,7 +33,7 @@ while [ 1 ]; do
     step "Creating backup of ${db_name} in ${TARGET_FILE}..."
     mysqldump \
       -h "${MYSQL_HOST:-mariadb}" -u "${MYSQL_USER:-root}" -p${MYSQL_PASSWORD} \
-      -a --databases "${db_name}" | gzip >"${TARGET_FILE}"
+      -a --routines --databases "${db_name}" | gzip >"${TARGET_FILE}"
   done
 
   # Dump grants
